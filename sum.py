@@ -1,17 +1,19 @@
+from cache_decorator import Cache
 """
 Create a function to compute sum of digits. Call this sum of digits function
 to find the sum of digits of numbers ranges from 1001 to 22000.
 """
-def sum_of_digits(num):
-    sum=0
-    while(num!=0):
-        sum=sum+int(num%10)
-        num=num/10
+@Cache()#Cache decorator used to stor the recent values.
+def sum_of_digits():
+    sum =0
+    initial = 1001
+
+    for initial in range(22000):
+        while(initial!=0):
+            sum=sum+int(initial%10)
+            initial = initial/10
     return sum
 
-num = int(input("Enter +ve Integer: "))
-
-if(num>=1001 and num<=22000):
-    print(sum_of_digits(num))
-else:
-    print("Not in Excepted Range")
+print(sum_of_digits())
+#Without Cache <Execution Time: 4.79s>
+#With Cache <Execution Time: 1.77s>
